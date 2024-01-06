@@ -12,16 +12,19 @@
     <Grid>
         <NavigationView PaneDisplayMode="Auto">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="Historique d'achat" Icon="Document" />
+                <NavigationViewItem Name="ha" Content="Historique d'achat" Icon="Document" Tapped="NavigationViewItem_Tapped" />
+                <NavigationViewItem Name="ad" Content="Ajout données" Icon="Folder" Tapped="NavigationViewItem_Tapped" />
             </NavigationView.MenuItems>
 
-            <controls:DataGrid Name="HistoriqueAchat" 
-                               Margin="0 20 20 20"
-                               AutoGenerateColumns="False">
-
-            </controls:DataGrid>
+            <Frame x:Name="ContentFrame" Margin="24">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition/>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
         </NavigationView>
-        
-        
+
+
     </Grid>
 </Page>

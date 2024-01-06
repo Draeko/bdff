@@ -9,4 +9,6 @@ Assets\Wide310x150Logo.scale-200.png
 App.xbf
 BDFF.xr.xml
 MainPage.xbf
+Views\AjoutDonnees.xbf
+Views\GridHistoriqueAchat.xbf
 Properties\Default.rd.xml
