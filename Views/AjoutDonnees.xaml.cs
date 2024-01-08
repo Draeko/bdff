@@ -23,25 +23,62 @@ namespace BDFF.Views
     /// </summary>
     public sealed partial class AjoutDonnees : Page
     {
-        DataTable TVA = null;
+        private DataTable DataTVA = null;
+        private DataTable DataCategorie = null;
+        private DataTable DataArticle = null;
 
         public AjoutDonnees()
         {
             this.InitializeComponent();
             Database data = new Database();
-            TVA = data.getTVA();
-            List<string> tauxTVA = new List<string>();
-            foreach(DataRow row in TVA.Rows)
+
+            //Récupération des valeurs de TVA
+            DataTVA = data.getTVA();
+            CBB_TauxTVA.ItemsSource = setComponent(DataTVA, "taux");
+
+            //Récupérations des valeurs de Catégorie
+            DataCategorie = data.getCategorie();
+            CBB_Categorie.ItemsSource = setComponent(DataCategorie, "nom");
+
+            //Récupération des valeurs de Article
+            DataArticle = data.getArticle();
+            CBB_NomArticle.ItemsSource = setComponent(DataArticle, "nom");
+
+        }
+
+        private List<string> setComponent(DataTable dataIn, string nomIndice)
+        {
+            List<string> listString = new List<string>();
+            foreach(DataRow row in dataIn.Rows)
             {
-                tauxTVA.Add(row["taux"].ToString());
+                listString.Add(row[nomIndice].ToString());
             }
-            Combobox.ItemsSource = tauxTVA;
+            return listString;
         }
 
         private void Validation_Click(object sender, RoutedEventArgs e)
         {
             //get TVA ID
-            var id = TVA.Select("taux = " + Combobox.Text)[0][0];
+            var id = DataTVA.Select("taux = " + CBB_TauxTVA.Text)[0][0];
+
+            //data pour insert
+            /*
+             * date
+             * id_article
+             * prix_unitaire
+             * quantité
+             * id_tva
+             * 
+             */
+        }
+
+        private void CBB_NomArticle_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            var texte = DataCategorie.Select("nom = " + CBB_NomArticle.Text)[0][0];
+            if (texte != null)
+            {
+                CBB_Categorie.Text = texte.ToString();
+            }
         }
     }
 }

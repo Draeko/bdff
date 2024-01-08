@@ -12926,18 +12926,18 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Drekorig\\.nuget\\packages\\": {},
+    "C:\\Users\\bdff\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Drekorig\\Documents\\BDFF\\bdff\\BDFF.csproj",
+      "projectUniqueName": "C:\\Users\\bdff\\source\\repos\\BDFF\\BDFF.csproj",
       "projectName": "BDFF",
-      "projectPath": "C:\\Users\\Drekorig\\Documents\\BDFF\\bdff\\BDFF.csproj",
-      "packagesPath": "C:\\Users\\Drekorig\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Drekorig\\Documents\\BDFF\\bdff\\obj\\",
+      "projectPath": "C:\\Users\\bdff\\source\\repos\\BDFF\\BDFF.csproj",
+      "packagesPath": "C:\\Users\\bdff\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bdff\\source\\repos\\BDFF\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -12945,7 +12945,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Drekorig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bdff\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

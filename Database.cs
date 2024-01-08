@@ -38,11 +38,24 @@ namespace BDFF
 
         public DataTable getTVA()
         {
-            string query = "SELECT id, taux FROM dev.tva;";
+            return requestData("SELECT id, taux FROM dev.tva;");
+        }
+
+        public DataTable getCategorie()
+        {
+            return requestData("SELECT id, nom FROM dev.article_categorie ORDER BY nom;");
+        }
+
+        public DataTable getArticle()
+        {
+            return requestData("SELECT id, nom, id_categorie FROM dev.article ORDER BY nom;");
+        }
+
+        private DataTable requestData(string query)
+        {
             DataTable dt = SelectData(query);
             dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
             return dt;
-
         }
 
         public static DataTable SelectData(string query)
