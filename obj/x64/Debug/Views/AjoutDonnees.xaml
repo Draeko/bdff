@@ -16,7 +16,7 @@
                   Width="200" 
                   Height="55" 
                   IsEditable="True"
-                                              />
+                                                                    />
         <ComboBox x:ConnectionId='4' Name="CBB_Categorie" 
                   Header="Catégorie"
                   Width="200"

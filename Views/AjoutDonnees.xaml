@@ -16,7 +16,7 @@
                   Width="200" 
                   Height="55" 
                   IsEditable="True"
-                  KeyUp="CBB_NomArticle_KeyUp"/>
+                  SelectionChanged="CBB_NomArticle_SelectionChanged"/>
         <ComboBox Name="CBB_Categorie" 
                   Header="Catégorie"
                   Width="200"

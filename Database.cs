@@ -26,14 +26,20 @@ namespace BDFF
         }
 
 
-        public static void RunQuery(string query)
+        public static int RunQuery(string query)
         {
+            int result = 0;
             connection.Open();
 
             NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
             NpgsqlDataReader dr = cmd.ExecuteReader();
+            if(dr.HasRows)
+            {
 
+            }
             connection.Close();
+
+            return result;
         }
 
         public DataTable getTVA()
@@ -98,13 +104,29 @@ namespace BDFF
                 + "ha.date as \"Date\" "
                 + "from dev.historique_achat ha, dev.article a, dev.article_categorie ac, dev.tva t "
                 + "where ha.id_article = a.id and "
+                + "ac.id = a.id_categorie and "
                 + "ha.id_tva = t.id"
             );
         }
 
-        public void setHistoriqueAchat()
+        public int setHistoriqueAchat(DateTime date, int id_article, decimal prix_unitaire, int quantite, int id_tva)
         {
-            //"INSERT INTO historique_achat ha VALUES();"
+            return RunQuery("INSERT INTO dev.historique_achat (date, id_article, prix_unitaire, quantite, id_tva) " +
+                "VALUES('" + date.ToString("yyyy-MM-dd") + "'," +
+                "'" + id_article + "'," +
+                "'" + prix_unitaire + "'," +
+                "'" + quantite + "'," +
+                "'" + id_tva + "'" +
+                ");");
+        }
+
+        public int setCategorie(string nom)
+        {
+            return RunQuery("INSERT INTO dev.article_categorie (nom) VALUES('" + nom + "')");
+        }
+
+        public int setArticle(string nom, int id_categorie) {
+            return RunQuery("INSERT INTO dev.article (nom, id_categorie) VALUES('" + nom + "', '" + id_categorie + "');");
         }
     }
 }

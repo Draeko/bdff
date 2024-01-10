@@ -23,6 +23,7 @@ namespace BDFF.Views
     /// </summary>
     public sealed partial class AjoutDonnees : Page
     {
+        private Database data = null;
         private DataTable DataTVA = null;
         private DataTable DataCategorie = null;
         private DataTable DataArticle = null;
@@ -30,7 +31,7 @@ namespace BDFF.Views
         public AjoutDonnees()
         {
             this.InitializeComponent();
-            Database data = new Database();
+            data = new Database();
 
             //Récupération des valeurs de TVA
             DataTVA = data.getTVA();
@@ -58,26 +59,44 @@ namespace BDFF.Views
 
         private void Validation_Click(object sender, RoutedEventArgs e)
         {
-            //get TVA ID
-            var id = DataTVA.Select("taux = " + CBB_TauxTVA.Text)[0][0];
-
-            //data pour insert
-            /*
-             * date
-             * id_article
-             * prix_unitaire
-             * quantité
-             * id_tva
-             * 
-             */
-        }
-
-        private void CBB_NomArticle_KeyUp(object sender, KeyRoutedEventArgs e)
-        {
-            var texte = DataCategorie.Select("nom = " + CBB_NomArticle.Text)[0][0];
-            if (texte != null)
+            var id_categorie = 0;
+            var categorie = DataCategorie.Select("nom = '" +CBB_Categorie.Text + "'");
+            if(categorie.Length > 0)
             {
-                CBB_Categorie.Text = texte.ToString();
+                id_categorie = Convert.ToInt32(categorie[0]["id"]);
+            }
+            else
+            {
+                id_categorie = data.setCategorie(CBB_Categorie.Text);
+            }
+            if (id_categorie == 0) throw new Exception("id_categorie == 0, erreur dans la récupération ou la création d'un nouvel id");
+
+
+            var id_article = 0;
+            var article = DataArticle.Select("nom = '" + CBB_NomArticle.Text + "'");
+            if (article.Length > 0)
+            {
+                id_article = Convert.ToInt32(article[0]["id"]);
+            }
+            else
+            {
+                id_article = data.setArticle(CBB_NomArticle.Text, id_categorie);
+            }
+            if (id_article == 0) throw new Exception("id_article == 0, erreur dans la récupération ou la création d'un nouvel id");
+
+            var id_tva = Convert.ToInt32(DataTVA.Select("taux = '" + CBB_TauxTVA.Text + "'")[0]["id"]);
+
+            data.setHistoriqueAchat(DP_DateAchat.Date.Date, id_article, Convert.ToDecimal(TB_PrixUnitaire.Text), Convert.ToInt32(TB_Quantite.Text), id_tva);
+        }
+        
+
+        private void CBB_NomArticle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var Categorie = DataArticle.Select("nom = '" + CBB_NomArticle.Text + "'");
+            
+            if(Categorie.Length > 0)
+            {
+                CBB_Categorie.Text = DataCategorie.Select("id =" + Categorie[0]["id_categorie"])[0]["nom"].ToString();
             }
         }
     }
